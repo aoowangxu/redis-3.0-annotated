@@ -56,7 +56,7 @@ struct sdshdr {
     int free;
 
     // 数据空间
-    char buf[];
+    char buf[];  //柔性 数组？
 };
 
 /*
@@ -65,7 +65,7 @@ struct sdshdr {
  * T = O(1)
  */
 static inline size_t sdslen(const sds s) {
-    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));
+    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));   //退回结构体开始
     return sh->len;
 }
 
